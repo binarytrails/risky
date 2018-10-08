@@ -3,18 +3,17 @@
 
 CXX=g++
 CXXFLAGS=-std=c++11 -Wall -Wextra -Wfatal-errors -pedantic \
-		 -I./src -I./src/drivers
+		 -I./src
 
 root="src"
 build="build"
-drivers="src/drivers"
 
 all:
 	mkdir -p build
 
 game: all
 	${CXX} ${CXXFLAGS} -lSDL2 \
-	${drivers}/Game.cpp ${root}/Window.cpp \
+	${root}/Window.cpp ${root}/Game.cpp ${root}/GameDriver.cpp \
 	-o ${build}/game.out
 
 clean:

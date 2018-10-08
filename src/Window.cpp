@@ -1,5 +1,5 @@
 //! @file
-//! @author Vsevolod (Seva) Ivanov
+//! @author Vsevolod Ivanov
 
 #include "Window.h"
 
