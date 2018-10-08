@@ -3,9 +3,18 @@
 
 #pragma once
 
+#include <string>
+
+using namespace std;
+
 class Country
 {
     public:
-        Country();
+        Country(const string name);
         ~Country();
+
+        const string getName();
+
+    private:
+        const string name;
 };
