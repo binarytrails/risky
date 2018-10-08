@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Player::Player()
+Player::Player(const string name): name(name)
 {
 }
 
@@ -15,15 +15,21 @@ Player::~Player()
         delete country;
     this->countries.clear();
 
-    for (Card* card: this->cardsHand)
+    for (Card* card: this->cards)
         delete card;
-    this->cardsHand.clear();
+    this->cards.clear();
+}
+
+const string Player::getName() const
+{
+    return this->name;
 }
 
 void Player::addCountry(Country* country)
 {
     this->countries.push_back(country);
 }
+
 void Player::removeCountry(Country* country)
 {
     auto it = find(this->countries.begin(), this->countries.end(), country);
@@ -31,14 +37,24 @@ void Player::removeCountry(Country* country)
         this->countries.erase(it);
 }
 
+vector<Country*> Player::getCountries() const
+{
+    return this->countries;
+}
+
 void Player::addCard(Card* card)
 {
-    this->cardsHand.push_back(card);
+    this->cards.push_back(card);
 }
 
 void Player::removeCard(Card* card)
 {
-    auto it = find(this->cardsHand.begin(), this->cardsHand.end(), card);
-    if (it != this->cardsHand.end())
-        this->cardsHand.erase(it);
+    auto it = find(this->cards.begin(), this->cards.end(), card);
+    if (it != this->cards.end())
+        this->cards.erase(it);
+}
+
+vector<Card*> Player::getCards() const
+{
+    return this->cards;
 }

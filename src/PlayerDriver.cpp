@@ -10,21 +10,33 @@ using namespace std;
 
 int main(int args, char* argv[])
 {
-    Player* player1 = new Player();
+    Player* player1 = new Player("FooBar");
 
     // 1. Player owns a collection of countries
-    Country* usa = new Country();
-    Country* canada = new Country();
+    Country* usa = new Country("USA");
+    Country* canada = new Country("CA");
+
     player1->addCountry(usa);
+    cout << player1 << endl;
+
     player1->addCountry(canada);
-    //TODO cout
+    cout << player1 << endl;
+
+    player1->removeCountry(usa);
+    cout << player1 << endl;
 
     // 2. Player owns a hand of Risk cards
-    Card* card1 = new Card();
-    Card* card2 = new Card();
+    Card* card1 = new Card("Infantry");
+    Card* card2 = new Card("Cavalry");
+
     player1->addCard(card1);
+    cout << player1 << endl;
+
     player1->addCard(card2);
-    //TODO cout
+    cout << player1 << endl;
+
+    player1->removeCard(card1);
+    cout << player1 << endl;
 
     // 3. Player has his own dice rolling facility object
     // 1-3 dices per roll
