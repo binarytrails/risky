@@ -5,7 +5,7 @@
 
 #include <string>
 #include <vector>
-#include <ostream>
+#include <iostream>
 #include <algorithm> // find
 #include "Country.h"
 #include "Card.h"

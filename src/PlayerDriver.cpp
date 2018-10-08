@@ -42,6 +42,9 @@ int main(int args, char* argv[])
     // 1-3 dices per roll
 
     // 4. Player must implement reinforce(), attack(), fortify()
+    player1->reinforce();
+    player1->attack();
+    player1->fortify();
 
     delete player1;
     return 0;

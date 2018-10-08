@@ -58,3 +58,21 @@ vector<Card*> Player::getCards() const
 {
     return this->cards;
 }
+
+bool Player::reinforce()
+{
+    cout << "Player::reinforce()" << endl;
+    return 1;
+}
+
+bool Player::attack()
+{
+    cout << "Player::attack()" << endl;
+    return 1;
+}
+
+bool Player::fortify()
+{
+    cout << "Player::fortify()" << endl;
+    return 1;
+}
