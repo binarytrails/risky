@@ -11,6 +11,9 @@ Game::Game()
 
 Game::~Game()
 {
+    for (Player* player: this->players)
+        delete player;
+    this->players.clear();
     delete this->windowEvent;
     delete this->window;
 }
@@ -48,4 +51,10 @@ void Game::play()
             SDL_RenderPresent(this->window->getRenderer());
         }
     }
+}
+
+bool Game::addPlayer(Player *player)
+{
+    this->players.push_back(player);
+    return true;
 }
