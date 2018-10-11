@@ -5,6 +5,13 @@ Diana Zitting-Rioux
 
 #pragma once
 
+enum CardType {
+	Infantry,
+	Cavalry,
+	Artillery,
+	NoCardsLeft
+};
+
 class Deck {
 public:
 	Deck(); // constructor with default 42 countries
