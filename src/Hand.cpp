@@ -24,27 +24,26 @@ Hand::Hand()
 // Calls draw() from Deck to receive a random card to be put in the hand
 void Hand::drawACard(Deck& d)
 {
-	int b = d.draw();
+	CardType b = d.draw();
 
 	switch (b) {
-	case 0: {
-		cout << "Can't receive anymore cards." << endl; 
-		break; 
-	}
-	case 1: {
+	case Infantry: {
 		infantryInHand++;
 		handSize++;
 		break;
 	}
-	case 2: {
+	case Cavalry: {
 		cavalryInHand++;
 		handSize++;
 		break;
 	}
-	case 3: {
+	case Artillery: {
 		artilleryInHand++;
 		handSize++;
 		break;
+	}
+	default: {
+		cout<< "Can't draw a card." << endl;
 	}
 	}
 }
