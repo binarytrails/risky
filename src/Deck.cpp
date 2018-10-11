@@ -49,11 +49,11 @@ Deck::Deck(int countriesOnTheMap)
 }
 
 // Draws a card from the deck with random number generator and returns it to the deck
-int Deck::draw()
+CardType Deck::draw()
 {
 	if (deckSize == 0) { // if there are no cards in the deck
 		cout<< "Can't draw more cards as the deck is empty\n";
-		return 0;
+		return NoCardsLeft;
 	}
 
 	bool FoundInDeck = false;
@@ -64,22 +64,22 @@ int Deck::draw()
 		infantryInDeck--;
 		deckSize --;
 		cout << "You drew an Infantry card\n";
-		return 1;
+		return CardType::Infantry;
 	}
 	if (RandomNum % 3 == 1 && cavalryInDeck > 0) { // if number is 3 mod 1, returns a Cavalry card and removes it from the deck
 		cavalryInDeck--;
 		deckSize--;
 		cout << "You drew a Cavalry card\n";
-		return 2;
+		return CardType::Cavalry;
 	}
 	if (RandomNum % 3 == 2 && artilleryInDeck > 0) { // if number is 3 mod 2, returns an Artillery card and removes it from the deck
 		artilleryInDeck--;
 		deckSize--;
 		cout << "You drew an Artillery card\n";
-		return 3;
+		return CardType::Artillery;
 	}
 	} while (FoundInDeck == false); // loops it again in case there are no cards of that type left in the deck
-	return 0;
+	return NoCardsLeft;
 }
 
 // shows the contents of the deck for demo use
