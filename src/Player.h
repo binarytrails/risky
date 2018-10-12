@@ -9,7 +9,7 @@
 #include <algorithm> // find
 #include "Country.h"
 #include "Card.h"
-#include "Dice.h"
+//#include "Dice.h"
 
 using namespace std;
 
@@ -19,7 +19,7 @@ class Player
         Player(const string name);
         ~Player();
 
-        const string getName() const;
+        string getName() const;
 
         void addCountry(Country* country);
         void removeCountry(Country* country);
@@ -48,7 +48,7 @@ inline ostream& operator<<(ostream &output, const Player *player)
     output << player->getName() << ": ";
     output << "Cards={ ";
     for (Card* card: player->getCards())
-        output << card->getName() << " ";
+        output << card->getTypeName() << " ";
     output << "} ";
     output << "Countries={ ";
     for (Country* country: player->getCountries())

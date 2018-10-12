@@ -10,11 +10,16 @@ using namespace std;
 class Card
 {
     public:
-        Card(const string name);
+        enum Type {
+            Infantry, Cavalry, Artillery
+        };
+
+        Card(const Type type);
         ~Card();
 
-        const string getName();
+        Type getType() const;
+        string getTypeName() const;
 
     private:
-        const string name;
+        const Type type;
 };

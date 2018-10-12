@@ -20,7 +20,7 @@ Player::~Player()
     this->cards.clear();
 }
 
-const string Player::getName() const
+string Player::getName() const
 {
     return this->name;
 }

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-int main(int args, char* argv[])
+int main()
 {
     Player* player1 = new Player("FooBar");
 
@@ -26,8 +26,8 @@ int main(int args, char* argv[])
     cout << player1 << endl;
 
     // 2. Player owns a hand of Risk cards
-    Card* card1 = new Card("Infantry");
-    Card* card2 = new Card("Cavalry");
+    Card* card1 = new Card(Card::Type::Infantry);
+    Card* card2 = new Card(Card::Type::Cavalry);
 
     player1->addCard(card1);
     cout << player1 << endl;
