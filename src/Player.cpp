@@ -58,6 +58,19 @@ vector<Card*> Player::getCards() const
 {
     return this->cards;
 }
+vector<int> Player::rollDices(const int number)
+{
+    if ((number < 1) or (number > 3))
+        throw -1;
+
+    PlayerDice dice;
+    vector<int> results;
+
+    for (int i = 0; i < number; ++i)
+        results.push_back(dice.roll());
+
+    return results;
+}
 
 bool Player::reinforce()
 {

@@ -1,5 +1,5 @@
 //! @file
-//! @author ...
+//! @author Vsevolod Ivanov
 
 #include "Card.h"
 

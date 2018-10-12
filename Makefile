@@ -14,14 +14,14 @@ all:
 game: all
 	${CXX} ${CXXFLAGS} -lSDL2 \
 	${root}/Map.cpp ${root}/Country.cpp ${root}/Player.cpp \
-	${root}/Card.cpp \
+	${root}/Card.cpp ${root}/PlayerDice.cpp \
 	${root}/Window.cpp ${root}/Game.cpp ${root}/GameDriver.cpp \
 	-o ${build}/game.out
 
 player: all
 	${CXX} ${CXXFLAGS} -lSDL2 \
 	${root}/Country.cpp ${root}/Player.cpp \
-	${root}/Card.cpp \
+	${root}/Card.cpp ${root}/PlayerDice.cpp \
 	${root}/Window.cpp ${root}/Game.cpp ${root}/PlayerDriver.cpp \
 	-o ${build}/player.out
 

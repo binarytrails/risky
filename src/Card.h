@@ -1,5 +1,5 @@
 //! @file
-//! @author ...
+//! @author Vsevolod Ivanov
 
 #pragma once
 

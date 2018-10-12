@@ -2,6 +2,7 @@
 //! @author Vsevolod Ivanov
 
 #include <iostream>
+#include <vector>
 #include "Player.h"
 #include "Country.h"
 #include "Card.h"
@@ -40,6 +41,12 @@ int main()
 
     // 3. Player has his own dice rolling facility object
     // 1-3 dices per roll
+    cout << "Rolling 3 dices..." << endl;
+    vector<int> dicesResults = player1->rollDices(3);
+    cout << "Dices results: ";
+    for (auto diceValue: dicesResults)
+        cout << diceValue << " ";
+    cout << endl;
 
     // 4. Player must implement reinforce(), attack(), fortify()
     player1->reinforce();

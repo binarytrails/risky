@@ -9,7 +9,7 @@
 #include <algorithm> // find
 #include "Country.h"
 #include "Card.h"
-//#include "Dice.h"
+#include "PlayerDice.h"
 
 using namespace std;
 
@@ -29,7 +29,7 @@ class Player
         void removeCard(Card* card);
         vector<Card*> getCards() const;
 
-        int rollDice();
+        vector<int> rollDices(const int number);
 
         bool reinforce();
         bool attack();
@@ -45,7 +45,7 @@ class Player
 
 inline ostream& operator<<(ostream &output, const Player *player)
 {
-    output << player->getName() << ": ";
+    output << "Player=" << player->getName() << ": ";
     output << "Cards={ ";
     for (Card* card: player->getCards())
         output << card->getTypeName() << " ";
