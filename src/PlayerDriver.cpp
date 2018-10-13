@@ -11,7 +11,7 @@ using namespace std;
 
 int main()
 {
-    Player* player1 = new Player("FooBar");
+    Player* player1 = new Player("FooBar");V
 
     // 1. Player owns a collection of countries
     Country* usa = new Country("USA");
