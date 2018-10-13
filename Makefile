@@ -19,11 +19,18 @@ game: all
 	-o ${build}/game.out
 
 player: all
-	${CXX} ${CXXFLAGS} -lSDL2 \
+	${CXX} ${CXXFLAGS} \
 	${root}/Country.cpp ${root}/Player.cpp \
 	${root}/Card.cpp ${root}/PlayerDice.cpp \
-	${root}/Window.cpp ${root}/Game.cpp ${root}/PlayerDriver.cpp \
+	${root}/PlayerDriver.cpp \
 	-o ${build}/player.out
+
+map: all
+	${CXX} ${CXXFLAGS} \
+	${root}/Country.cpp ${root}/Player.cpp \
+	${root}/Card.cpp ${root}/PlayerDice.cpp \
+	${root}/Map.cpp ${root}/MapDriver.cpp \
+	-o ${build}/map.out
 
 clean:
 	rm -rf ${build}/
