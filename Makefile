@@ -27,7 +27,8 @@ player: all
 
 map: all
 	${CXX} ${CXXFLAGS} \
-	${root}/Country.cpp ${root}/Player.cpp \
+	${root}/Country.cpp ${root}/Continent.cpp \
+	${root}/Player.cpp \
 	${root}/Card.cpp ${root}/PlayerDice.cpp \
 	${root}/Map.cpp ${root}/MapDriver.cpp \
 	-o ${build}/map.out

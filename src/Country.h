@@ -4,6 +4,7 @@
 #pragma once
 
 #include <string>
+#include <ostream>
 
 using namespace std;
 
@@ -13,8 +14,18 @@ class Country
         Country(const string name);
         ~Country();
 
-        const string getName();
+        string getName() const;
+        int getArmies() const;
+        void setArmies(const int armies);
 
     private:
         const string name;
+        int armies;
 };
+
+inline ostream& operator<<(ostream &output, const Country *country)
+{
+    output << "Country=" << country->getName() << ": ";
+    output << "Armies=" << country->getArmies();
+    return output;
+}
