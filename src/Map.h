@@ -1,12 +1,12 @@
 //! @file
 //! @author Vsevolod Ivanov
 
+#pragma once
+
 #include <iostream>
 #include <vector>
 #include "Player.h"
 #include "Country.h"
-
-#pragma once
 
 class Map
 {

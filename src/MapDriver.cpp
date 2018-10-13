@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "Map.h"
+#include "Continent.h"
 #include "Country.h"
 #include "Player.h"
 
@@ -12,13 +13,12 @@ using namespace std;
 int main()
 {
     cout << "Map Driver..." << endl;
-    Map *map = new Map();
 
-
-    // 3. Country is owned by a player and contain a number of armies.
+    // Country is owned by a player and contain a number of armies.
     Player* player1 = new Player("FooBar");
-    Country* usa = new Country("USA");
-    Country* canada = new Country("CA");
+    Continent* america = new Continent("America");
+    Country* usa = new Country("USA", america);
+    Country* canada = new Country("CA", america);
 
     player1->addCountry(usa);
     cout << player1 << endl;
@@ -29,6 +29,15 @@ int main()
     cout << usa << endl;
     canada->setArmies(3);
     cout << canada << endl;
+
+    // Map is connected graph
+    Map *map = new Map();
+
+
+    // Continents are connected subgraph
+
+    // Country belongs to one and only continent
+
 
     delete map;
     return 0;

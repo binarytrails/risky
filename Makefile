@@ -20,9 +20,9 @@ game: all
 
 player: all
 	${CXX} ${CXXFLAGS} \
-	${root}/Country.cpp ${root}/Player.cpp \
+	${root}/Country.cpp ${root}/Continent.cpp \
 	${root}/Card.cpp ${root}/PlayerDice.cpp \
-	${root}/PlayerDriver.cpp \
+	${root}/Player.cpp ${root}/PlayerDriver.cpp \
 	-o ${build}/player.out
 
 map: all

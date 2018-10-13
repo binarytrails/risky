@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "Player.h"
+#include "Continent.h"
 #include "Country.h"
 #include "Card.h"
 
@@ -11,11 +12,12 @@ using namespace std;
 
 int main()
 {
-    Player* player1 = new Player("FooBar");V
+    Player* player1 = new Player("FooBar");
+    Continent* america = new Continent("America");
 
     // 1. Player owns a collection of countries
-    Country* usa = new Country("USA");
-    Country* canada = new Country("CA");
+    Country* usa = new Country("USA", america);
+    Country* canada = new Country("CA", america);
 
     player1->addCountry(usa);
     cout << player1 << endl;

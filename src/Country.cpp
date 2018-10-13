@@ -5,7 +5,8 @@
 
 using namespace std;
 
-Country::Country(const string name): name(name)
+Country::Country(const string name, Continent *continent):
+    name(name), continent(continent)
 {
 }
 
@@ -16,6 +17,11 @@ Country::~Country()
 string Country::getName() const
 {
     return this->name;
+}
+
+Continent* Country::getContinent()
+{
+    return this->continent;
 }
 
 int Country::getArmies() const
