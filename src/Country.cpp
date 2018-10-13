@@ -5,6 +5,10 @@
 
 using namespace std;
 
+Country::Country()
+{
+}
+
 Country::Country(const string name, Continent *continent):
     name(name), continent(continent)
 {

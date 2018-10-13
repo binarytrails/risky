@@ -12,6 +12,7 @@ using namespace std;
 class Country
 {
     public:
+        Country(); // boost
         Country(const string name, Continent *continent);
         ~Country();
 
