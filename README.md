@@ -1,1 +1,2 @@
-# comp345
+# Comp345: Risk Game
+Team: 20
