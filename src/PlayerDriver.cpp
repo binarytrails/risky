@@ -13,11 +13,10 @@ using namespace std;
 int main()
 {
     Player* player1 = new Player("FooBar");
-    Continent* america = new Continent("America");
 
     // 1. Player owns a collection of countries
-    Country* usa = new Country("USA", america);
-    Country* canada = new Country("CA", america);
+    Country* usa = new Country("USA");
+    Country* canada = new Country("CA");
 
     player1->addCountry(usa);
     cout << player1 << endl;

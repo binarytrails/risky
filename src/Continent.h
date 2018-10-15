@@ -4,6 +4,7 @@
 #pragma once
 
 #include <string>
+#include "Country.h"
 
 using namespace std;
 

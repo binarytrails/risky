@@ -3,8 +3,6 @@
 
 #include "Continent.h"
 
-using namespace std;
-
 Continent::Continent(const string name): name(name)
 {
 }
