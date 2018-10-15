@@ -17,7 +17,7 @@ public:
 	Deck(); // constructor with default 42 countries
 	Deck(int countriesOnTheMap); // constructor with set amount of countries on the map
 
-	int draw(); // Draws a random card from the deck and gives it to the hand
+	CardType draw(); // Draws a random card from the deck and gives it to the hand
 	void showDeck(); // Shows the contents of the deck
 	void setDeck(int n);
 

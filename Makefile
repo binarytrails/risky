@@ -33,5 +33,11 @@ map: all
 	${root}/Map.cpp ${root}/MapDriver.cpp \
 	-o ${build}/map.out
 
+cards: all
+	${CXX} ${CXXFLAGS} \
+	${root}/Deck.cpp ${root}/Hand.cpp \
+	${root}/CardsDriver.cpp \
+	-o ${build}/cards.out
+
 clean:
 	rm -rf ${build}/
