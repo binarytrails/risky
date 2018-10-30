@@ -12,10 +12,10 @@ int main(int argc, char *argv[])
 {
     Game *game = new Game();
 
-    if (game->init_ui() == false)
-        return 1;
+    //if (game->init_ui() == false)
+    //    return 1;
 
-    Player *player1 = new Player();
+    Player *player1 = new Player("Player1");
     game->addPlayer(player1);
 
     game->play();
