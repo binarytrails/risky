@@ -44,9 +44,31 @@ bool Game::init_sdl2()
     return true;
 }
 
+/* Part 1: Game start
+ * You must deliver a driver that demonstrates:
+ * 1. different valid maps can be loaded
+ *    their validity is verified (i.e. it is a connected graph, etc)
+ *    invalid maps are gracefully rejected
+ * 2. the right number of players is created
+ *    a deck with the right number of cards is created
+ */
+bool Game::start()
+{
+    cout << "Game::start()" << endl;
+    // 1. select a map from a list of map files as stored in a directory
+    // 2. select the number of players in the game (2-6 players)
+    // 3. The code should then use the map loader to load the selected map
+    // 4. create all the players
+    // 5. assign dice rolling facilities to the players
+    // 6. create a deck of cards
+    // 7. assign an empty hand of cards to each player
+    return true;
+}
+
 void Game::play()
 {
-    this->state = Game::State::RUN;
+    if (this->start())
+        this->state = Game::State::RUN;
 
     while (Game::state == Game::State::RUN)
     {

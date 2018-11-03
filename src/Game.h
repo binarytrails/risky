@@ -36,4 +36,6 @@ class Game
 
         Window* window;
         SDL_Event* windowEvent;
+
+        bool start();
 };
