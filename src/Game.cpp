@@ -5,8 +5,17 @@
 
 using namespace std;
 
-Game::Game()
+Game::Game(Game::UI ui): ui(ui)
 {
+    switch(ui)
+    {
+        case Game::UI::SDL2:
+            this->init_sdl2();
+            break;
+        case Game::UI::SHELL:
+        default:
+            break;
+    }
 }
 
 Game::~Game()
@@ -18,7 +27,7 @@ Game::~Game()
     delete this->window;
 }
 
-bool Game::init_ui()
+bool Game::init_sdl2()
 {
     SDL_Init(SDL_INIT_VIDEO);
     Uint32 flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
@@ -37,15 +46,15 @@ bool Game::init_ui()
 
 void Game::play()
 {
-    this->state = Game::State::RUNNING;
+    this->state = Game::State::RUN;
 
-    while (Game::state == Game::State::RUNNING)
+    while (Game::state == Game::State::RUN)
     {
+        // SDL2
         if (this->window != NULL)
         {
             if (this->windowEvent->type == SDL_QUIT)
-                this->state = Game::State::TERMINATED;
-
+                this->state = Game::State::HALT;
             SDL_PollEvent(this->windowEvent);
             SDL_RenderClear(this->window->getRenderer());
             SDL_RenderPresent(this->window->getRenderer());

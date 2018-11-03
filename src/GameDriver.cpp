@@ -10,10 +10,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    Game *game = new Game();
-
-    //if (game->init_ui() == false)
-    //    return 1;
+    Game *game = new Game(Game::UI::SHELL);
 
     Player *player1 = new Player("Player1");
     game->addPlayer(player1);
