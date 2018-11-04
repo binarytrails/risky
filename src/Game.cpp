@@ -65,15 +65,17 @@ bool Game::start()
     mapFpath << mapName << ".map";
     if (mapReader.read(mapFpath.str()) == false)
         return false;
+    // 3. The code should then use the map loader to load the selected map
+    // TODO
 
     // 2. select the number of players in the game (2-6 players)
     cout << "Enter the number of players: "; cin >> nbOfPlayers;
     cout << mapName << " : " << nbOfPlayers << endl;
-
-    // 3. The code should then use the map loader to load the selected map
-    //
     // 4. create all the players
-    //
+    for (int i = 1; i <= nbOfPlayers; ++i)
+        this->addPlayer(new Player("Player" + to_string(i)));
+    cout << "Created " << this->players.size() << " players!" << endl;
+
     // 5. assign dice rolling facilities to the players
     //
     // 6. create a deck of cards

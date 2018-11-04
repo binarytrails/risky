@@ -3,10 +3,11 @@
 
 #pragma once
 
-#include <iostream>
 #include <memory>
+#include <string>
 #include <vector>
 #include <sstream>
+#include <iostream>
 #include <SDL2/SDL.h>
 #include "Window.h"
 #include "Player.h"
