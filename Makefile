@@ -14,7 +14,7 @@ all:
 game: all
 	${CXX} ${CXXFLAGS} -lSDL2 \
 	${root}/Map.cpp ${root}/MapReader.cpp \
-	${root}/Country.cpp ${root}/Player.cpp \
+	${root}/Continent.cpp ${root}/Country.cpp ${root}/Player.cpp \
 	${root}/Card.cpp ${root}/PlayerDice.cpp \
 	${root}/Window.cpp ${root}/Game.cpp ${root}/GameDriver.cpp \
 	-o ${build}/game.out

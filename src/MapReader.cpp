@@ -4,48 +4,36 @@
 #include "MapReader.h"
 
 // Puts all the territories string in a vector
-std::vector<std::string> MapReader::readTerritories(std::ifstream* territories) {
+void MapReader::readTerritories(ifstream* territories) {
 
-	std::vector<std::string> territoriesVector;
-	std::string s;
-
-	while (std::getline(*territories, s)) {
-		if (s != "") {
-			territoriesVector.push_back(s);
-		}
-		else {
-		}
+	string s;
+	while (getline(*territories, s)) {
+		if (s.empty())
+            break;
+	    this->territories.push_back(s);
 	}
-
-	return territoriesVector;
 }
 
 // Puts all the territories string in a vector
-std::vector<std::string> MapReader::readContinents(std::ifstream* territories) {
+void MapReader::readContinents(ifstream* territories) {
 
-	std::vector<std::string> continentsVector;
-	std::string s;
-
-	while (std::getline(*territories, s)) {
-		if (s != "") {
-			continentsVector.push_back(s);
-		}
-		else {
-			break;
-		}
+	string s;
+	while (getline(*territories, s)) {
+		if (s.empty())
+            break;
+	    this->continents.push_back(s);
 	}
-	return continentsVector;
 }
 
 //This method creates a map data structure to be able to translate int (from the graph implementation) to their corresponding strings (territories)
-std::map<int, std::string> MapReader::createTerritoriesTranslatorMapNtS(std::vector<std::string> const &terrVector) {
+map<int, string> MapReader::createTerritoriesTranslatorMapNtS(vector<string> const &terrVector) {
 
-	std::map<int, std::string> map1;
+	map<int, string> map1;
 
 
 	int i = 0;
 	int y = 0;
-	std::string terr;
+	string terr;
 
 	while (i < terrVector.size()) {
 
@@ -56,7 +44,7 @@ std::map<int, std::string> MapReader::createTerritoriesTranslatorMapNtS(std::vec
 			terr.push_back(terrVector[i][y]);
 			y++;
 		}
-		map1.insert(std::pair<int, std::string>(i, terr));
+		map1.insert(pair<int, string>(i, terr));
 		y = 0;
 		terr = "";
 		i++;
@@ -71,14 +59,14 @@ std::map<int, std::string> MapReader::createTerritoriesTranslatorMapNtS(std::vec
 }
 
 //this methods creates a map data structure that translate String(terrories) to int, to store them in the graph implementation
-std::map<std::string, int> MapReader::createTerritoriesTranslatorMapStN(std::vector<std::string> const &terrVector) {
+map<string, int> MapReader::createTerritoriesTranslatorMapStN(vector<string> const &terrVector) {
 
-	std::map<std::string, int> map1;
+	map<string, int> map1;
 
 
 	int i = 0;
 	int y = 0;
-	std::string terr;
+	string terr;
 
 	while (i < terrVector.size()) {
 
@@ -89,7 +77,7 @@ std::map<std::string, int> MapReader::createTerritoriesTranslatorMapStN(std::vec
 			terr.push_back(terrVector[i][y]);
 			y++;
 		}
-		map1.insert(std::pair<std::string, int>(terr, i));
+		map1.insert(pair<string, int>(terr, i));
 		y = 0;
 		terr = "";
 		i++;
@@ -99,20 +87,20 @@ std::map<std::string, int> MapReader::createTerritoriesTranslatorMapStN(std::vec
 }
 
 //This method add edges to the "graph" implementation
-void MapReader::addEdge(std::vector<std::vector<int>> &adj, int u, int v)
+void MapReader::addEdge(vector<vector<int>> &adj, int u, int v)
 {
 	adj[u].push_back(v);
 }
 
 //This methods prints the graph (which represent the map of the game) to the screen
-void MapReader::printGraph(std::vector<std::vector<int>> adj, int V, std::map<int, std::string> &mapNtS)
+void MapReader::printGraph(vector<vector<int>> adj, int V, map<int, string> &mapNtS)
 {
 	int i = 0;
 	for (int v = 0; v < V; ++v)
 	{
-		std::cout << "\n list of territories " << v << " : " << mapNtS[v] << "\n head ";
+		cout << "\n list of territories " << v << " : " << mapNtS[v] << "\n head ";
 		while (i < adj[v].size()) {
-			std::cout << "-> " << adj[v][i] << " : " << mapNtS[adj[v][i]] << std::endl;
+			cout << "-> " << adj[v][i] << " : " << mapNtS[adj[v][i]] << endl;
 			i++;
 		}
 		i = 0;
@@ -121,13 +109,13 @@ void MapReader::printGraph(std::vector<std::vector<int>> adj, int V, std::map<in
 }
 
 //The method create a "map" (which is not the same implementation as part 1 of the assignement), which represent the actual board
-void MapReader::graphmaker(std::vector<std::string>  &terrVector, std::map<std::string, int>  &mapStN, std::map<int, std::string> &mapNtS) {
+void MapReader::graphmaker(vector<string>  &terrVector, map<string, int>  &mapStN, map<int, string> &mapNtS) {
 	int i = 0;
 	int y = 0;
 	int commaCounter = 0;
-	std::string terr;
+	string terr;
 
-	std::vector<std::vector<int>> adj(terrVector.size() + 1);
+	vector<vector<int>> adj(terrVector.size() + 1);
 
 
 	while (i < terrVector.size()) {
@@ -159,45 +147,51 @@ void MapReader::graphmaker(std::vector<std::string>  &terrVector, std::map<std::
 }
 
 //The methods that calls all the accessory methods in order to create the game map
-bool MapReader::read(std::string mapFile)
+bool MapReader::read(string mapFile)
 {
-    std::cout << "Reading map " << mapFile << " ..." << std::endl;
-	std::ifstream input1(mapFile);
-	std::string s;
+    cout << "Reading map " << mapFile << " ..." << endl;
+	ifstream input1(mapFile);
+	string s;
 
 	if (input1.is_open() == false) {
-		std::cerr << "Error opening the file" << std::endl;
+		cerr << "Error opening the file" << endl;
         return false;
 	}
 
-	std::vector<std::string> inputMapVectors[2];
-	std::ifstream *inputPt = &input1;
-	int isValid = 0;
-
-	while (std::getline(input1, s)) {
-
-		if (s == "[Continents]") {
-			isValid++;
-			inputMapVectors[0] = readContinents(inputPt);
-		}
-
-		if (s == "[Territories]") {
-			isValid++;
-			inputMapVectors[1] = readTerritories(inputPt);
-
-			break;
-		}
+	ifstream *inputPt = &input1;
+	while (getline(input1, s)) {
+		if (s == "[Continents]")
+			readContinents(inputPt);
+		if (s == "[Territories]")
+			readTerritories(inputPt);
 	}
 
 	//Check if the input is valid
-	if (isValid != 2) {
-		std::cerr << "The map is invalid " << std::endl;
+	if (this->continents.empty() or this->territories.empty()) {
+		cerr << "The map is invalid " << endl;
 		return false;
 	}
     /*
-	std::map<int, std::string> mapNtS = createTerritoriesTranslatorMapNtS(inputMapVectors[1]);
-	std::map<std::string, int> mapStN = createTerritoriesTranslatorMapStN(inputMapVectors[1]);
+	map<int, string> mapNtS = createTerritoriesTranslatorMapNtS(inputMapVectors[1]);
+	map<string, int> mapStN = createTerritoriesTranslatorMapStN(inputMapVectors[1]);
 	graphmaker(inputMapVectors[1], mapStN, mapNtS);
     */
     return true;
+}
+
+int MapReader::getNbOfNodes()
+{
+    int count = 0;
+    for (string line: this->continents)
+    {
+        int nbOfCountries = stoi(line.substr(line.find("=") + 1));
+        count += nbOfCountries;
+    }
+    return count;
+}
+
+void MapReader::load(Map &map)
+{
+    regex regKey ("^\\[", regex_constants::icase);
+    cout << "WIP" << endl;
 }

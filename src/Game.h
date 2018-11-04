@@ -11,6 +11,7 @@
 #include <SDL2/SDL.h>
 #include "Window.h"
 #include "Player.h"
+#include "Map.h"
 #include "MapReader.h"
 
 using namespace std;
@@ -35,6 +36,7 @@ class Game
     private:
         Game::UI ui;
         Game::State state;
+        Map* map;
         vector<Player*> players;
 
         Window* window;

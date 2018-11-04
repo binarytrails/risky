@@ -25,6 +25,8 @@ Game::~Game()
     this->players.clear();
     delete this->windowEvent;
     delete this->window;
+    if (this->map != NULL)
+        delete map;
 }
 
 bool Game::init_sdl2()
@@ -65,8 +67,10 @@ bool Game::start()
     mapFpath << mapName << ".map";
     if (mapReader.read(mapFpath.str()) == false)
         return false;
+
     // 3. The code should then use the map loader to load the selected map
-    // TODO
+    this->map = new Map(mapReader.getNbOfNodes());
+    mapReader.load(*this->map);
 
     // 2. select the number of players in the game (2-6 players)
     cout << "Enter the number of players: "; cin >> nbOfPlayers;
