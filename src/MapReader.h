@@ -7,6 +7,7 @@
 #include <map>
 #include <regex>
 #include "Map.h"
+#include "Continent.h"
 
 using namespace std;
 
@@ -18,14 +19,9 @@ class MapReader
         void load(Map &map);
 
     private:
-        vector<string> continents;
-        vector<string> territories;
+        vector<string> contLines;
+        vector<string> terrLines;
 
         void readTerritories(ifstream* territories);
         void readContinents(ifstream* territories);
-        map<int, string> createTerritoriesTranslatorMapNtS(vector<string> const &terrVector);
-        map<string, int> createTerritoriesTranslatorMapStN(vector<string> const &terrVector);
-        void addEdge(vector<vector<int>> &adj, int u, int v);
-        void printGraph(vector<vector<int>> adj, int V, map<int, string> &mapNtS);
-        void graphmaker(vector<string>  &terrVector, map<string, int>  &mapStN, map<int, string> &mapNtS);
 };
