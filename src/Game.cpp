@@ -54,21 +54,39 @@ bool Game::init_sdl2()
  */
 bool Game::start()
 {
-    cout << "Game::start()" << endl;
+    cout << "Welcome to Risk!" << endl;
+    int nbOfPlayers;
+
     // 1. select a map from a list of map files as stored in a directory
+    string mapName;
+    MapReader mapReader;
+    stringstream mapFpath; mapFpath << "./assets/maps/";
+    cout << "Enter the map name (./assets/maps/): "; cin >> mapName;
+    mapFpath << mapName << ".map";
+    if (mapReader.read(mapFpath.str()) == false)
+        return false;
+
     // 2. select the number of players in the game (2-6 players)
+    cout << "Enter the number of players: "; cin >> nbOfPlayers;
+    cout << mapName << " : " << nbOfPlayers << endl;
+
     // 3. The code should then use the map loader to load the selected map
+    //
     // 4. create all the players
+    //
     // 5. assign dice rolling facilities to the players
+    //
     // 6. create a deck of cards
+    //
     // 7. assign an empty hand of cards to each player
     return true;
 }
 
 void Game::play()
 {
-    if (this->start())
-        this->state = Game::State::RUN;
+    if (this->start() == false)
+        return;
+    this->state = Game::State::RUN;
 
     while (Game::state == Game::State::RUN)
     {

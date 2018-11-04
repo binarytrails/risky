@@ -6,9 +6,11 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <sstream>
 #include <SDL2/SDL.h>
 #include "Window.h"
 #include "Player.h"
+#include "MapReader.h"
 
 using namespace std;
 
