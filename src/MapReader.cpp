@@ -79,6 +79,8 @@ void MapReader::load(Map &map)
     // Territories
     std::map<string, int> territories;
     std::map<string, int>::iterator territoriesIt;
+    std::map<string, vector<string>> terrEdges;
+    std::map<string, vector<string>>::iterator terrEdgesIt;
 
     for (string line: this->terrLines)
     {
@@ -86,29 +88,62 @@ void MapReader::load(Map &map)
         int count = 0;
         stringstream linestream(line);
         string segment;
+        Country* country;
+        vector<string> edges;
+
         while (getline(linestream, segment, ','))
         {
             switch (count)
             {
-                // name
+                // territory
                 case 0:
+                {
                     name = segment;
-                    cout << "Adding Territory " << name << " with edges to ";
+                    cout << "Adding " << name << " territory of ";
+                    country = new Country(segment);
                     break;
+                }
                 // x pixel
                 case 1:
                     break;
                 // y pixel
                 case 2:
                     break;
-                // adjacents
-                default:
-                    cout << segment << " ";
-                    // check if continent or territory
-                    //continentsIt =
+                // continent
+                case 3:
+                {
+                    cout << segment << " continent with edges to ";
+                    continentsIt = continents.find(segment);
+                    int node = map.addCountry(country, continentsIt->second);
+                    territories.insert(pair<string, int>(name, node));
                     break;
+                }
+                default:
+                {
+                    cout << segment << ",";
+                    edges.push_back(segment);
+                    break;
+                }
             }
             count++;
+        }
+        terrEdges.insert(pair<string, vector<string>>(name, edges));
+        cout << endl;
+    }
+
+    // Connecting the edges
+    for (auto elem: territories)
+    {
+        int node1 = elem.second;
+        cout << elem.first << " with node" << node1;
+        terrEdgesIt = terrEdges.find(elem.first);
+        cout << " with " << terrEdgesIt->second.size() << " edges to ";
+        for (auto edge: terrEdgesIt->second)
+        {
+            cout << edge << ",";
+            //territoriesIt = territories.find(edge);
+            //int node2 = territories->second;
+            //map.connectCountries(node1, node2, );
         }
         cout << endl;
     }
