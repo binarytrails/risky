@@ -3,20 +3,19 @@
 bool MapReader::read(string mapFile)
 {
     cout << "Reading map " << mapFile << " ..." << endl;
-	ifstream input1(mapFile);
-	string s;
+	ifstream in(mapFile);
+	string line;
 
-	if (input1.is_open() == false) {
+	if (in.is_open() == false) {
 		cerr << "Error opening the file" << endl;
         return false;
 	}
 
-	ifstream *inputPt = &input1;
-	while (getline(input1, s)) {
-		if (s == "[Continents]")
-			readContinents(inputPt);
-		if (s == "[Territories]")
-			readTerritories(inputPt);
+	while (getline(in, line)) {
+		if (line == "[Continents]")
+			readContinents(in);
+		if (line == "[Territories]")
+			readTerritories(in);
 	}
 
 	if (this->contLines.empty() or this->terrLines.empty()) {
@@ -26,23 +25,23 @@ bool MapReader::read(string mapFile)
     return true;
 }
 
-void MapReader::readTerritories(ifstream* territories)
+void MapReader::readTerritories(ifstream &in)
 {
-	string s;
-	while (getline(*territories, s)) {
-		if (s.empty())
+	string line;
+	while (getline(in, line)) {
+		if (line.empty())
             break;
-	    this->terrLines.push_back(s);
+	    this->terrLines.push_back(line);
 	}
 }
 
-void MapReader::readContinents(ifstream* territories)
+void MapReader::readContinents(ifstream &in)
 {
-	string s;
-	while (getline(*territories, s)) {
-		if (s.empty())
+	string line;
+	while (getline(in, line)) {
+		if (line.empty())
             break;
-	    this->contLines.push_back(s);
+	    this->contLines.push_back(line);
 	}
 }
 
@@ -75,8 +74,11 @@ void MapReader::load(Map &map)
             pair<string, Map::Graph&>(name, map.addContinent(continent))
         );
     }
+    cout << "----------------------------------------" << endl;
 
     // Territories
+    std::map<string, string> terrContinent;
+    std::map<string, string>::iterator terrContinentIt;
     std::map<string, int> territories;
     std::map<string, int>::iterator territoriesIt;
     std::map<string, vector<string>> terrEdges;
@@ -112,6 +114,7 @@ void MapReader::load(Map &map)
                 // continent
                 case 3:
                 {
+                    terrContinent.insert(pair<string, string>(name, segment));
                     cout << segment << " continent with edges to ";
                     continentsIt = continents.find(segment);
                     int node = map.addCountry(country, continentsIt->second);
@@ -130,21 +133,34 @@ void MapReader::load(Map &map)
         terrEdges.insert(pair<string, vector<string>>(name, edges));
         cout << endl;
     }
-
+    cout << "----------------------------------------" << endl;
     // Connecting the edges
     for (auto elem: territories)
     {
+        // get the edge territory continent graph
+        terrContinentIt = terrContinent.find(elem.first);
+        string contName = terrContinentIt->second;
+        continentsIt = continents.find(contName);
+        // get the node id of the territory 
         int node1 = elem.second;
-        cout << elem.first << " with node" << node1;
+        cout << "Connecting " << elem.first << " node" << node1;
         terrEdgesIt = terrEdges.find(elem.first);
-        cout << " with " << terrEdgesIt->second.size() << " edges to ";
+        cout << " with " << terrEdgesIt->second.size() << " edges " <<
+                "at " << continentsIt->first << " subgraph:" << endl;
         for (auto edge: terrEdgesIt->second)
         {
-            cout << edge << ",";
-            //territoriesIt = territories.find(edge);
-            //int node2 = territories->second;
-            //map.connectCountries(node1, node2, );
+            // get the edge territory node id
+            territoriesIt = territories.find(edge);
+            if (territoriesIt != territories.end())
+            {
+                int node2 = territoriesIt->second;
+                cout << "" << elem.first << " node" << node1 <<
+                        " -> " << edge << " node" << node2 << endl;
+                map.connectCountries(node1, node2, continentsIt->second);
+            }
         }
         cout << endl;
     }
+    cout << "----------------------------------------" << endl;
+    map.print();
 }

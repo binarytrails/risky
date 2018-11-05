@@ -22,6 +22,6 @@ class MapReader
         vector<string> contLines;
         vector<string> terrLines;
 
-        void readTerritories(ifstream* territories);
-        void readContinents(ifstream* territories);
+        void readTerritories(ifstream &in);
+        void readContinents(ifstream &in);
 };
