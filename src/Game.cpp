@@ -74,17 +74,21 @@ bool Game::start()
 
     // 2. select the number of players in the game (2-6 players)
     cout << "Enter the number of players: "; cin >> nbOfPlayers;
-    cout << mapName << " : " << nbOfPlayers << endl;
+    cout << "Creating " << nbOfPlayers << " players..." << endl;
     // 4. create all the players
     for (int i = 1; i <= nbOfPlayers; ++i)
-        this->addPlayer(new Player("Player" + to_string(i)));
-    cout << "Created " << this->players.size() << " players!" << endl;
+    {
+        Player *player = new Player("Player" + to_string(i));
+        // 5. assign dice rolling facilities to the players
+        player->rollDices(1);
+        // 7. assign an empty hand of cards to each player
+        cout << player->getName() << " has " <<
+                player->getCards().size() << " cards" << endl;
+        this->addPlayer(player);
+    }
 
-    // 5. assign dice rolling facilities to the players
-    //
     // 6. create a deck of cards
-    //
-    // 7. assign an empty hand of cards to each player
+
     return true;
 }
 
