@@ -65,7 +65,7 @@ void Game::sdl2_poll()
  * 2. the right number of players is created
  *    a deck with the right number of cards is created
  */
-bool Game::start()
+bool Game::shell_init()
 {
     cout << "Welcome to Risk!" << endl;
     int nbOfPlayers;
@@ -103,10 +103,27 @@ bool Game::start()
     return true;
 }
 
+/* Part 2: Game play: startup phase
+ */
+void Game::shell_start()
+{
+    // 1. The order of play of the players in the game is determined randomly
+    //
+    // 2. All countries in the map are randomly assigned to players one by one in a round-robin fashion
+    // 2.1 All countries in the map have been assigned to one and only one player
+    // 3. Players are given a number of armies (A), to be placed one by one in a round-robin fashion on some of the countries that they own, where A is:
+    // 3.1 all players have eventually placed the right number of armies on their own countries after army placement is over.
+    int nbOfArmies;
+}
+
+/* Part 3: Game play: main game loop
+ */
 void Game::play()
 {
-    if (this->start() == false)
+    if (this->shell_init() == false)
         return;
+
+    this->shell_start();
     this->state = Game::State::RUN;
 
     while (Game::state == Game::State::RUN)
@@ -114,12 +131,21 @@ void Game::play()
         if (this->window != NULL)
             this->sdl2_poll();
 
+        /* Proceeding in a round-robin fashion as setup in the startup phase, every player is given the opportunity to do sequentially each of the following actions during their turn
+         */
         for (auto player: this->players)
         {
-            cout << "Turn of " << player->getName() << endl;
-            player->reinforce();
-            player->attack();
-            player->fortify();
+            cout << "Turn of " << player->getName() <<
+                    " (press enter to continue)" << endl;
+            if (cin.get() == '\n')
+            {
+                // action 1
+                player->reinforce();
+                // action 2
+                player->attack();
+                // action 3
+                player->fortify();
+            }
         }
     }
 }
