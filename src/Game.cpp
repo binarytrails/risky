@@ -73,6 +73,7 @@ bool Game::shell_init()
     // 1. select a map from a list of map files as stored in a directory
     string mapName;
     MapReader mapReader;
+    // different valid maps can be loaded
     stringstream mapFpath; mapFpath << "./assets/maps/";
     cout << "Enter the map name (./assets/maps/): "; cin >> mapName;
     mapFpath << mapName << ".map";
@@ -82,6 +83,13 @@ bool Game::shell_init()
     // 3. The code should then use the map loader to load the selected map
     this->map = new Map(mapReader.getNbOfNodes());
     mapReader.load(*this->map);
+    // their validity is verified
+    cout << "The loaded map is ";
+    if (this->map->valid())
+        cout << " valid!";
+    else
+        cout << " invalid!";
+    cout << endl;
 
     // 6. create a deck of cards
     this->deck = new Deck();

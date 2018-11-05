@@ -32,6 +32,7 @@ class Map
         vector<Country*> getCountries();
         void connectCountries(const int country1, const int country2,
                      Map::Graph& continent);
+        bool valid() const;
         void print() const;
 
     private:

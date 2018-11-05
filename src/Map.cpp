@@ -56,6 +56,24 @@ void Map::connectCountries(const int country1, const int country2,
     add_edge(country1, country2, continent);
 }
 
+// complete (undirected) graph is known to have exactly V(V-1)/2
+bool Map::valid() const
+{
+    int v;
+    int edges;
+    auto nodes = boost::vertices(*this->map);
+
+    for (auto nIt = nodes.first; nIt != nodes.second; ++nIt)
+    {
+        auto neighbors = adjacent_vertices(*nIt, *this->map);
+
+        for (auto adjIt = neighbors.first; adjIt != neighbors.second; ++adjIt)
+            edges++;
+        v++;
+    }
+    return (edges == ((v*(v-1))/2));
+}
+
 void Map::print() const
 {
     auto nodes = boost::vertices(*this->map);
