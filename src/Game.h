@@ -8,6 +8,7 @@
 #include <vector>
 #include <sstream>
 #include <iostream>
+#include <stdlib.h>
 #include <SDL2/SDL.h>
 #include "Window.h"
 #include "Player.h"
