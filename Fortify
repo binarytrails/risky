@@ -1,0 +1,82 @@
+#ifndef Fortification_hpp
+#define Fortification_hpp
+#include "Player.hpp"
+#include "Map.hpp"
+#include "Country.hpp"
+#include <vector>
+#include<iostream>
+
+#include <stdio.h>
+
+class Fortification {
+public:
+    Fortification();
+    fortify(Player* player, Map* map);
+};
+
+
+
+#endif /* Fortification_hpp */
+
+
+#include "Fortification.hpp"
+#include <vector>
+
+Fortification::Fortification() { }
+
+void Fortification::fortify(Player* player, Map* map) {
+    
+    // Boolean method to get out of loop
+    bool isValid = false;
+    string sourceCountry;
+    
+    // Checking if the source country is valid or not
+    do {
+        cout << "Please enter the name of the country you want to move your armies from.(Type quit to to quit.) " << endl;
+        cin >> sourceCountry;
+        
+        if (sourceCountry == "quit") {
+            return;
+        }
+        
+        else {
+            
+            vector<Country*>::iterator country;
+            
+            for(country = player->getCountries()->begin(); country != player->getCountries()->end(); ++country) {
+                if(sourceCountry == (*country)->getName()) {
+                    isValid = true;
+                    break;
+                }
+            }
+        }
+        
+    } while (!isValid);
+    
+    isValid = false;
+    
+    
+    
+    // Checking if any is connected to source country
+    vector<Country*> isPossible;
+    
+    
+        
+        
+        
+    }
+    
+    
+
+    
+    // Checking if the target country is valid or not
+    
+    // Checking for valid armies
+    
+    // Checking for right armies moved.
+    
+    
+
+  
+    
+}} 
