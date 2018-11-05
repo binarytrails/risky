@@ -164,8 +164,25 @@ bool Game::shell_start()
     cout << "Each player will have " << nbOfArmies << endl;
 
     // 3.1 all players have eventually placed the right number of armies on their own countries after army placement is over.
+    for (Player *player: this->players)
+    {
+        int placedArmies = 0;
+        cout << player->getName() << ":" << endl;
 
-
+        while (placedArmies != nbOfArmies)
+        {
+            int nb = 0;
+            int id = 0;
+            cout << "How many armies? "; cin >> nb;
+            if ((nb < 1) or ((placedArmies + nb) > nbOfArmies))
+                cerr << "Error: wrong amount of armies" << endl;
+            else {
+                cout << "Enter the country node id: "; cin >> id;
+                // TODO add to country map
+                placedArmies += nb;
+            }
+        }
+    }
     return true;
 }
 

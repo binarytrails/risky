@@ -41,6 +41,7 @@ class Player
         const string name;
         vector<Country*> countries;
         vector<Card*> cards;
+        //map<Country*, nbOfArmies...
 };
 
 inline ostream& operator<<(ostream &output, const Player *player)
