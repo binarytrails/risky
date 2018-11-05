@@ -4,14 +4,20 @@ Team: 20
 
 ## Compile
 
-    make map
-    make player
+    make game
 
 ## Execute
 
-    build/./map.out
-    build/./player.out
+    build/./game.out
+
+## Dependencies
+
+- boost
+- sdl2
 
 ## Authors
 - Vsevolod Ivanov
-- ...
+- Kevin Abellard
+- Diana Zitting-Rioux
+- Anik Mushfiqur
+
