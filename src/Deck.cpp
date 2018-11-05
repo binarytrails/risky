@@ -5,7 +5,7 @@ Deck.cpp
 */
 
 #include "Deck.h"
-#include <stdlib.h>  
+#include <stdlib.h>
 #include <time.h>
 #include <iostream>
 
@@ -19,7 +19,7 @@ Deck::Deck()
 	cavalryInDeck = 14;
 	artilleryInDeck = 14;
 
-	srand(time(0)); // set the seed for rng 
+	srand(time(0)); // set the seed for rng
 }
 
 Deck::Deck(int countriesOnTheMap)
@@ -45,7 +45,7 @@ Deck::Deck(int countriesOnTheMap)
 		artilleryInDeck = countriesDividedByThree;
 	}
 
-	srand(time(0)); // set the seed for rng 
+	srand(time(0)); // set the seed for rng
 }
 
 // Draws a card from the deck with random number generator and returns it to the deck

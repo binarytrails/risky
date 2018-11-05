@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "Map.h"
 #include "MapReader.h"
+#include "Deck.h"
 
 using namespace std;
 
@@ -36,7 +37,9 @@ class Game
     private:
         Game::UI ui;
         Game::State state;
+
         Map* map;
+        Deck* deck;
         vector<Player*> players;
 
         Window* window;

@@ -27,6 +27,8 @@ Game::~Game()
     delete this->window;
     if (this->map != NULL)
         delete map;
+    if (this->deck != NULL)
+        delete deck;
 }
 
 bool Game::init_sdl2()
@@ -72,6 +74,9 @@ bool Game::start()
     this->map = new Map(mapReader.getNbOfNodes());
     mapReader.load(*this->map);
 
+    // 6. create a deck of cards
+    this->deck = new Deck();
+
     // 2. select the number of players in the game (2-6 players)
     cout << "Enter the number of players: "; cin >> nbOfPlayers;
     cout << "Creating " << nbOfPlayers << " players..." << endl;
@@ -86,9 +91,6 @@ bool Game::start()
                 player->getCards().size() << " cards" << endl;
         this->addPlayer(player);
     }
-
-    // 6. create a deck of cards
-
     return true;
 }
 
