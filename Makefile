@@ -36,9 +36,17 @@ map: all
 
 cards: all
 	${CXX} ${CXXFLAGS} \
-	${root}/Deck.cpp ${root}/Hand.cpp \
+	${root}/Deck.cpp ${root} Hand.cpp \
 	${root}/CardsDriver.cpp \
 	-o ${build}/cards.out
+
+reinforcement: all
+	${CXX} ${CXXFLAGS} \
+	${root}/Map.cpp ${root}/MapReader.cpp ${root}/Hand.cpp \
+	${root}/Continent.cpp ${root}/Country.cpp ${root}/Player.cpp \
+	${root}/Card.cpp ${root}/Deck.cpp ${root}/PlayerDice.cpp \
+	${root}/Reinforcement.cpp ${root}/ReinforcementDriver.cpp \
+	-o ${build}/reinforcement.out
 
 clean:
 	rm -rf ${build}/

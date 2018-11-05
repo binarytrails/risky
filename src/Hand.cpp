@@ -54,6 +54,11 @@ void Hand::showHand()
 	cout << "Cards in hand: " << handSize << ". Infantry in hand :" << infantryInHand << ". Cavalry in hand : " << cavalryInHand << ". Artillery in hand: " << artilleryInHand << endl;
 }
 
+int Hand::getHandSize()
+{
+    return this->handSize;
+}
+
 // Exchanges cards in the hand for an integer value of armies according to the rules 
 int Hand::exchange()
 {

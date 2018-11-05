@@ -14,7 +14,7 @@ Hand TestHand2;
 int main() {
 
 	//create player1, add 12 countries and 4 cards.
-	Player* player1 = new Player();
+	Player* player1 = new Player("Player1");
 	Country* usa = new Country("USA");
 	Country* canada = new Country("CA");
 	Country* mexico = new Country("Mexico");
@@ -62,7 +62,7 @@ int main() {
 
 	Reinforcement::reinforcement(player1, TestHand, 3);
 
-	Player* player2 = new Player();
+	Player* player2 = new Player("Player2");
 	Country* japan = new Country("Japan");
 
 	player2->addCountry(japan);

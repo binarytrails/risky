@@ -13,6 +13,7 @@ public:
 
 	void drawACard(Deck& d);
 	void showHand();
+    int getHandSize();
 
 	int exchange();
 
