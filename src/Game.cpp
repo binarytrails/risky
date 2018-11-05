@@ -105,7 +105,7 @@ bool Game::shell_init()
 
 /* Part 2: Game play: startup phase
  */
-void Game::shell_start()
+bool Game::shell_start()
 {
     // 1. The order of play of the players in the game is determined randomly
     int playerTurn;
@@ -139,8 +139,34 @@ void Game::shell_start()
     }
 
     // 3. Players are given a number of armies (A), to be placed one by one in a round-robin fashion on some of the countries that they own, where A is:
-    // 3.1 all players have eventually placed the right number of armies on their own countries after army placement is over.
     int nbOfArmies;
+    switch (this->players.size())
+    {
+        case 2:
+            nbOfArmies = 40;
+            break;
+        case 3:
+            nbOfArmies = 35;
+            break;
+        case 4:
+            nbOfArmies = 30;
+            break;
+        case 5:
+            nbOfArmies = 25;
+            break;
+        case 6:
+            nbOfArmies = 20;
+            break;
+        default:
+            cerr << "Error: Unsupported number of players..." << endl;
+            return false;
+    }
+    cout << "Each player will have " << nbOfArmies << endl;
+
+    // 3.1 all players have eventually placed the right number of armies on their own countries after army placement is over.
+
+
+    return true;
 }
 
 /* Part 3: Game play: main game loop
@@ -149,8 +175,8 @@ void Game::play()
 {
     if (this->shell_init() == false)
         return;
-
-    this->shell_start();
+    if (this->shell_start() == false)
+        return;
     this->state = Game::State::RUN;
 
     while (Game::state == Game::State::RUN)

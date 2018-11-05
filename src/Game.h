@@ -49,5 +49,5 @@ class Game
         void sdl2_poll();
 
         bool shell_init();
-        void shell_start();
+        bool shell_start();
 };
