@@ -29,6 +29,7 @@ class Map
         Graph& addContinent(Continent* continent);
         int addCountry(Country* country, Graph& continent);
         bool hasCountry(Country* country) const;
+        vector<Country*> getCountries();
         void connectCountries(const int country1, const int country2,
                      Map::Graph& continent);
         void print() const;

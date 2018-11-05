@@ -108,18 +108,36 @@ bool Game::shell_init()
 void Game::shell_start()
 {
     // 1. The order of play of the players in the game is determined randomly
+    int playerTurn;
     vector<Player*> playersRandomOrder;
     while (this->players.empty() == false)
     {
-        int turn = rand() % this->players.size();
-        playersRandomOrder.push_back(this->players.at(turn));
-        this->players.erase(this->players.begin() + turn);
+        playerTurn = rand() % this->players.size();
+        playersRandomOrder.push_back(this->players.at(playerTurn));
+        this->players.erase(this->players.begin() + playerTurn);
     }
     for (Player *player: playersRandomOrder)
         this->players.push_back(player);
 
     // 2. All countries in the map are randomly assigned to players one by one in a round-robin fashion
-    // 2.1 All countries in the map have been assigned to one and only one player
+    Player *player;
+    playerTurn = 0;
+    Country *country;
+    int countryTurn = 0;
+    vector<Country*> countriesToAssign = this->map->getCountries();
+
+    while (countriesToAssign.empty() == false)
+    {
+        countryTurn = rand() % countriesToAssign.size();
+        country = countriesToAssign.at(countryTurn);
+        player = this->players.at(playerTurn);
+        // 2.1 All countries in the map have been assigned to one and only one player
+        player->addCountry(country);
+        cout << player->getName() << " got " << country->getName() << endl;
+        countriesToAssign.erase(countriesToAssign.begin() + countryTurn);
+        playerTurn = (playerTurn + 1) % this->players.size();
+    }
+
     // 3. Players are given a number of armies (A), to be placed one by one in a round-robin fashion on some of the countries that they own, where A is:
     // 3.1 all players have eventually placed the right number of armies on their own countries after army placement is over.
     int nbOfArmies;

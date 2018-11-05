@@ -45,6 +45,11 @@ bool Map::hasCountry(Country* country) const
     return false;
 }
 
+vector<Country*> Map::getCountries()
+{
+    return this->countriesData;
+}
+
 void Map::connectCountries(const int country1, const int country2,
                            Map::Graph& continent)
 {
