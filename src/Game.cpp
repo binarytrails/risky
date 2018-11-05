@@ -10,7 +10,7 @@ Game::Game(Game::UI ui): ui(ui)
     switch(ui)
     {
         case Game::UI::SDL2:
-            this->init_sdl2();
+            this->sdl2_init();
             break;
         case Game::UI::SHELL:
         default:
@@ -31,7 +31,7 @@ Game::~Game()
         delete deck;
 }
 
-bool Game::init_sdl2()
+bool Game::sdl2_init()
 {
     SDL_Init(SDL_INIT_VIDEO);
     Uint32 flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
@@ -46,6 +46,15 @@ bool Game::init_sdl2()
     }
     this->windowEvent = new SDL_Event();
     return true;
+}
+
+void Game::sdl2_poll()
+{
+    if (this->windowEvent->type == SDL_QUIT)
+        this->state = Game::State::HALT;
+    SDL_PollEvent(this->windowEvent);
+    SDL_RenderClear(this->window->getRenderer());
+    SDL_RenderPresent(this->window->getRenderer());
 }
 
 /* Part 1: Game start
@@ -102,14 +111,15 @@ void Game::play()
 
     while (Game::state == Game::State::RUN)
     {
-        // SDL2
         if (this->window != NULL)
+            this->sdl2_poll();
+
+        for (auto player: this->players)
         {
-            if (this->windowEvent->type == SDL_QUIT)
-                this->state = Game::State::HALT;
-            SDL_PollEvent(this->windowEvent);
-            SDL_RenderClear(this->window->getRenderer());
-            SDL_RenderPresent(this->window->getRenderer());
+            cout << "Turn of " << player->getName() << endl;
+            player->reinforce();
+            player->attack();
+            player->fortify();
         }
     }
 }

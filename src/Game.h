@@ -30,7 +30,6 @@ class Game
         Game(UI ui);
         ~Game();
 
-        bool init_sdl2();
         void play();
         bool addPlayer(Player *player);
 
@@ -44,6 +43,9 @@ class Game
 
         Window* window;
         SDL_Event* windowEvent;
+
+        bool sdl2_init();
+        void sdl2_poll();
 
         bool start();
 };
