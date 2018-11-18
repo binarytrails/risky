@@ -4,45 +4,45 @@ bool MapReader::read(string mapFile)
 {
     cout << "Reading map " << mapFile << " ..." << endl;
     ifstream in(mapFile);
-	string line;
+    string line;
 
-	if (in.is_open() == false) {
-		cerr << "Error opening the file" << endl;
+    if (in.is_open() == false) {
+        cerr << "Error opening the file" << endl;
         return false;
-	}
+    }
 
-	while (getline(in, line)) {
-		if (line == "[Continents]")
-			readContinents(in);
-		if (line == "[Territories]")
-			readTerritories(in);
-	}
+    while (getline(in, line)) {
+        if (line == "[Continents]")
+            readContinents(in);
+        if (line == "[Territories]")
+            readTerritories(in);
+    }
 
-	if (this->contLines.empty() or this->terrLines.empty()) {
-		cerr << "The map is invalid " << endl;
-		return false;
-	}
+    if (this->contLines.empty() or this->terrLines.empty()) {
+        cerr << "The map is invalid " << endl;
+        return false;
+    }
     return true;
 }
 
 void MapReader::readTerritories(ifstream &in)
 {
-	string line;
-	while (getline(in, line)) {
-		if (line.empty())
+    string line;
+    while (getline(in, line)) {
+        if (line.empty())
             break;
-	    this->terrLines.push_back(line);
-	}
+        this->terrLines.push_back(line);
+    }
 }
 
 void MapReader::readContinents(ifstream &in)
 {
-	string line;
-	while (getline(in, line)) {
-		if (line.empty())
+    string line;
+    while (getline(in, line)) {
+        if (line.empty())
             break;
-	    this->contLines.push_back(line);
-	}
+        this->contLines.push_back(line);
+    }
 }
 
 
