@@ -6,6 +6,7 @@
 #include <fstream>
 #include <map>
 #include <regex>
+#include <boost/filesystem.hpp>
 #include "Map.h"
 #include "Continent.h"
 
@@ -17,6 +18,7 @@ class MapReader
         bool read(string mapFile);
         int getNbOfNodes();
         void load(Map &map);
+        void printMaps(string dirpath) const;
 
     private:
         vector<string> contLines;

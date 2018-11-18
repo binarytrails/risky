@@ -3,7 +3,7 @@
 bool MapReader::read(string mapFile)
 {
     cout << "Reading map " << mapFile << " ..." << endl;
-	ifstream in(mapFile);
+    ifstream in(mapFile);
 	string line;
 
 	if (in.is_open() == false) {
@@ -163,4 +163,23 @@ void MapReader::load(Map &map)
     }
     cout << "----------------------------------------" << endl;
     map.print();
+}
+
+
+void MapReader::printMaps(string dirpath) const
+{
+    using namespace boost::filesystem;
+
+    directory_iterator itr(dirpath);
+    directory_iterator end_itr;
+
+    for (; itr != end_itr; ++itr)
+    {
+        if (!is_directory(itr->status()))
+        {
+            cout << "[" << itr->path().stem().string() << "] ";
+        }
+    }
+    cout << endl;
+
 }

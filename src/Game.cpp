@@ -65,6 +65,7 @@ void Game::sdl2_poll()
  * 2. the right number of players is created
  *    a deck with the right number of cards is created
  */
+// TODO select maps (c)
 bool Game::shell_init()
 {
     cout << "Welcome to Risk!" << endl;
@@ -73,9 +74,11 @@ bool Game::shell_init()
     // 1. select a map from a list of map files as stored in a directory
     string mapName;
     MapReader mapReader;
-    // different valid maps can be loaded
     stringstream mapFpath; mapFpath << "./assets/maps/";
-    cout << "Enter the map name (./assets/maps/): "; cin >> mapName;
+    cout << "Available maps (" << mapFpath.str() << "):" << endl;
+    mapReader.printMaps(mapFpath.str());
+    cout << "Enter the map name: ";
+    cin >> mapName;
     mapFpath << mapName << ".map";
     if (mapReader.read(mapFpath.str()) == false)
         return false;

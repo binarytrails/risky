@@ -3,7 +3,8 @@
 
 CXX=g++
 CXXFLAGS=-std=c++11 -Wall -Wextra -Wfatal-errors -pedantic \
-		 -I./src -I/usr/include/boost
+		 -I./src -I/usr/include/boost \
+		 -lboost_system -lboost_filesystem
 
 root=src
 build=build
