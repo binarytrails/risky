@@ -59,6 +59,9 @@ int MapReader::getNbOfNodes()
 
 void MapReader::load(Map &map)
 {
+    auto console = spdlog::stdout_color_mt("mapreader");
+    stringstream output;
+
     // Continents
     std::map<string, Map::Graph&> continents;
     std::map<string, Map::Graph&>::iterator continentsIt;
@@ -67,14 +70,14 @@ void MapReader::load(Map &map)
     {
         string name = line.substr(0, line.find("="));
         int nbOfCountries = stoi(line.substr(line.find("=") + 1));
-        cout << "Adding Continent " << name <<
-                " with " << nbOfCountries << " country nodes" << endl;
+        output << "Adding Continent " << name <<
+                  " with " << nbOfCountries << " country nodes";
+        console->debug(output.str()); output.str("");
         Continent* continent = new Continent(name);
         continents.insert(
             pair<string, Map::Graph&>(name, map.addContinent(continent))
         );
     }
-    cout << "----------------------------------------" << endl;
 
     // Territories
     std::map<string, string> terrContinent;
@@ -101,7 +104,7 @@ void MapReader::load(Map &map)
                 case 0:
                 {
                     name = segment;
-                    cout << "Adding " << name << " territory of ";
+                    output << "Adding " << name << " territory of ";
                     country = new Country(segment);
                     break;
                 }
@@ -115,7 +118,7 @@ void MapReader::load(Map &map)
                 case 3:
                 {
                     terrContinent.insert(pair<string, string>(name, segment));
-                    cout << segment << " continent with edges to ";
+                    output << segment << " continent with edges to ";
                     continentsIt = continents.find(segment);
                     int node = map.addCountry(country, continentsIt->second);
                     territories.insert(pair<string, int>(name, node));
@@ -123,17 +126,16 @@ void MapReader::load(Map &map)
                 }
                 default:
                 {
-                    cout << segment << ",";
+                    output << segment << ",";
                     edges.push_back(segment);
                     break;
                 }
             }
             count++;
         }
+        console->debug(output.str()); output.str("");
         terrEdges.insert(pair<string, vector<string>>(name, edges));
-        cout << endl;
     }
-    cout << "----------------------------------------" << endl;
     // Connecting the edges
     for (auto elem: territories)
     {
@@ -143,10 +145,11 @@ void MapReader::load(Map &map)
         continentsIt = continents.find(contName);
         // get the node id of the territory 
         int node1 = elem.second;
-        cout << "Connecting " << elem.first << " node" << node1;
+        output << "Connecting " << elem.first << " node" << node1;
         terrEdgesIt = terrEdges.find(elem.first);
-        cout << " with " << terrEdgesIt->second.size() << " edges " <<
-                "at " << continentsIt->first << " subgraph:" << endl;
+        output << " with " << terrEdgesIt->second.size() << " edges " <<
+                "at " << continentsIt->first << " subgraph:";
+        console->debug(output.str()); output.str("");
         for (auto edge: terrEdgesIt->second)
         {
             // get the edge territory node id
@@ -154,15 +157,14 @@ void MapReader::load(Map &map)
             if (territoriesIt != territories.end())
             {
                 int node2 = territoriesIt->second;
-                cout << "" << elem.first << " node" << node1 <<
-                        " -> " << edge << " node" << node2 << endl;
+                output << "" << elem.first << " node" << node1 <<
+                        " -> " << edge << " node" << node2;
+                console->debug(output.str()); output.str("");
                 map.connectCountries(node1, node2, continentsIt->second);
             }
         }
-        cout << endl;
     }
-    cout << "----------------------------------------" << endl;
-    map.print();
+    map.log();
 }
 
 

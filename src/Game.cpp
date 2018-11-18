@@ -87,12 +87,8 @@ bool Game::shell_init()
     this->map = new Map(mapReader.getNbOfNodes());
     mapReader.load(*this->map);
     // their validity is verified
-    cout << "The loaded map is ";
-    if (this->map->valid())
-        cout << " valid!";
-    else
-        cout << " invalid!";
-    cout << endl;
+    if (!this->map->valid())
+        cerr << "The loaded map is invalid" << endl;
 
     // 6. create a deck of cards
     this->deck = new Deck();

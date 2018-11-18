@@ -74,19 +74,22 @@ bool Map::valid() const
     return (edges == ((v*(v-1))/2));
 }
 
-void Map::print() const
+void Map::log() const
 {
+    auto console = spdlog::stdout_color_mt("map");
+    stringstream output;
     auto nodes = boost::vertices(*this->map);
 
     for (auto nIt = nodes.first; nIt != nodes.second; ++nIt)
     {
-        cout << "Node=" << *nIt << " with Edges={";
+        output << "Node=" << *nIt << " with Edges={";
         auto neighbors = adjacent_vertices(*nIt, *this->map);
 
         for (auto adjIt = neighbors.first; adjIt != neighbors.second; ++adjIt)
-            std::cout << "(" << *nIt << "," << *adjIt << ")";
+            output << "(" << *nIt << "," << *adjIt << ")";
 
-        cout << "}" << endl;
+        output << "}";
+        console->debug(output.str()); output.str("");
     }
 }
 

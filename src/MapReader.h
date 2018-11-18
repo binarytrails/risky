@@ -7,6 +7,8 @@
 #include <map>
 #include <regex>
 #include <boost/filesystem.hpp>
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
 #include "Map.h"
 #include "Continent.h"
 

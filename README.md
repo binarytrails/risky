@@ -13,6 +13,7 @@ Team: 20
 ## Dependencies
 
 - boost
+- spdlog
 - sdl2
 
 ## Authors

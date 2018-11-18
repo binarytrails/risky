@@ -10,6 +10,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+    spdlog::set_level(spdlog::level::info);
     Game *game = new Game(Game::UI::SHELL);
     game->play();
     delete game;
