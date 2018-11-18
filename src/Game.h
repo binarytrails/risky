@@ -11,6 +11,9 @@
 #include <iostream>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
+#include <spdlog/logger.h>
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
 #include "Window.h"
 #include "Player.h"
 #include "Map.h"
@@ -45,6 +48,10 @@ class Game
 
         Window* window;
         SDL_Event* windowEvent;
+
+        const string logname;
+        stringstream logbuf;
+        std::shared_ptr<spdlog::logger> logger;
 
         bool sdl2_init();
         void sdl2_poll();

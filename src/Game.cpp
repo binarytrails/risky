@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Game::Game(Game::UI ui): ui(ui)
+Game::Game(Game::UI ui): ui(ui), logname("game")
 {
     switch(ui)
     {
@@ -16,6 +16,7 @@ Game::Game(Game::UI ui): ui(ui)
         default:
             break;
     }
+    this->logger = spdlog::stdout_color_mt(this->logname);
 }
 
 Game::~Game()
@@ -103,8 +104,10 @@ bool Game::shell_init()
         // 5. assign dice rolling facilities to the players
         player->rollDices(1);
         // 7. assign an empty hand of cards to each player
-        cout << player->getName() << " has " <<
-                player->getCards().size() << " cards" << endl;
+        this->logbuf << player->getName() << " has " <<
+            player->getCards().size() << " cards";
+        this->logger->debug(this->logbuf.str());
+        this->logbuf.str("");
         this->addPlayer(player);
     }
     return true;
@@ -174,22 +177,32 @@ bool Game::shell_start()
     for (Player *player: this->players)
     {
         int placedArmies = 0;
-        cout << player->getName() << ":" << endl;
+        cout << player->getName() << " turn:" << endl;
 
         while (placedArmies != nbOfArmies)
         {
             int nb = 0;
-            int id = 0;
+            string country;
             cout << "How many armies? "; cin >> nb;
             if ((nb < 1) or ((placedArmies + nb) > nbOfArmies))
                 cerr << "Error: wrong amount of armies" << endl;
-            else {
-                cout << "Enter the country node id: "; cin >> id;
-                // TODO add to country map
+            else
+            {
+                cout << "Destination country: "; cin >> country;
+                if (!player->hasCountry(country))
+                {
+                    cerr << "You don't have this country" << endl;
+                    continue;
+                }
                 placedArmies += nb;
+                if (nbOfArmies - placedArmies == 0)
+                    continue;
+                cout << "There is " << nbOfArmies - placedArmies <<
+                        " armies to place" << endl;
             }
         }
     }
+
     return true;
 }
 

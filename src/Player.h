@@ -23,6 +23,7 @@ class Player
 
         void addCountry(Country* country);
         void removeCountry(Country* country);
+        bool hasCountry(string name);
         vector<Country*> getCountries() const;
 
         void addCard(Card* card);

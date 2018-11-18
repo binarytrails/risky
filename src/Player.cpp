@@ -37,6 +37,16 @@ void Player::removeCountry(Country* country)
         this->countries.erase(it);
 }
 
+bool Player::hasCountry(string name)
+{
+    for (Country* country: this->countries)
+    {
+        if (country->getName() == name)
+            return true;
+    }
+    return false;
+}
+
 vector<Country*> Player::getCountries() const
 {
     return this->countries;
