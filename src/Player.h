@@ -48,7 +48,10 @@ class Player
         const string name;
         vector<Country*> countries;
         vector<Card*> cards;
+        // Phase components
         Player::Phase activePhase;
+        Country* sourceCountry;
+        Country* targetCountry;
 };
 
 inline ostream& operator<<(ostream &output, const Player *player)

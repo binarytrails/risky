@@ -94,23 +94,67 @@ vector<int> Player::rollDices(const int number)
 
 bool Player::reinforce()
 {
-    cout << "Player::reinforce()" << endl;
+    cout << "Reinforcement phase!" << endl;
     this->activePhase = Player::REINFORCE;
-    return false;
+
+    // NOTE placeholder code until team members merge
+    int armies = 0;
+    string countryName;
+
+    cout << "How many armies? "; cin >> armies;
+    cout << "Destination country: "; cin >> countryName;
+
+    Country *country = this->getCountry(countryName);
+    this->targetCountry = country;
+    country->addArmies(armies);
+    cout << countryName << " has now " <<
+            country->getArmies() << " armies" << endl;
+
+    return true;
 }
 
 bool Player::attack()
 {
-    cout << "Player::attack()" << endl;
+    cout << "Attack phase!" << endl;
     this->activePhase = Player::ATTACK;
-    return false;
+
+    // NOTE placeholder code until team members merge
+    int armies = 0;
+    string sCountryName;
+    string dCountryName;
+
+    cout << "How many armies? "; cin >> armies;
+    cout << "Source country: "; cin >> sCountryName;
+    cout << "Destination country: "; cin >> dCountryName;
+
+    Country *sCountry = this->getCountry(sCountryName);
+    Country *dCountry = this->getCountry(dCountryName);
+
+    this->sourceCountry = sCountry;
+    this->targetCountry = dCountry;
+
+    return true;
 }
 
 bool Player::fortify()
 {
-    cout << "Player::fortify()" << endl;
+    cout << "Fortification phase!" << endl;
     this->activePhase = Player::FORTIFY;
-    return false;
+
+    // NOTE placeholder code until team members merge
+    int armies = 0;
+    string countryName;
+
+    cout << "How many armies? "; cin >> armies;
+    cout << "Destination country: "; cin >> countryName;
+
+    Country *country = this->getCountry(countryName);
+    this->targetCountry = country;
+    country->addArmies(armies);
+    cout << countryName << " has now " <<
+            country->getArmies() << " armies" << endl;
+
+    return true;
 }
 
 Player::Phase Player::getActivePhase() const
