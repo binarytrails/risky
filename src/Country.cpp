@@ -7,6 +7,7 @@ using namespace std;
 
 Country::Country()
 {
+    this->armies = 0;
 }
 
 Country::Country(string name): name(name)
@@ -33,4 +34,20 @@ void Country::setArmies(const int armies)
         throw -1;
 
     this->armies = armies;
+}
+
+void Country::addArmies(const int armies)
+{
+    if (armies < 0)
+        throw -1;
+
+    this->armies += armies;
+}
+
+void Country::removeArmies(const int armies)
+{
+    if (armies < 0)
+        throw -1;
+
+    this->armies -= armies;
 }

@@ -18,6 +18,8 @@ class Country
         string getName() const;
         int getArmies() const;
         void setArmies(const int armies);
+        void addArmies(const int armies);
+        void removeArmies(const int armies);
 
     private:
         const string name;
