@@ -20,20 +20,26 @@ int PhaseObserver::getId() const
 
 void PhaseObserver::update()
 {
-   Player& player = *this->subject->activePlayer;
    string phaseName;
+   Player& player = *this->subject->activePlayer;
    Player::Phase phase = player.getActivePhase();
+   Country* sourceCountry;
+   Country* targetCountry;
 
    switch (phase)
    {
         case Player::Phase::REINFORCE:
             phaseName = "Reinforcement";
+            targetCountry = player.targetCountry;
             break;
         case Player::Phase::ATTACK:
             phaseName = "Attack";
+            sourceCountry = player.sourceCountry;
+            targetCountry = player.targetCountry;
             break;
         case Player::Phase::FORTIFY:
             phaseName = "Fortification";
+            targetCountry = player.targetCountry;
             break;
         default:
             throw -1;
@@ -43,5 +49,9 @@ void PhaseObserver::update()
            " ----------" << endl;
    cout << "Player: " << player.getName() << endl;
    cout << "Phase:  " << phaseName << endl;
+   if (sourceCountry != NULL)
+        cout << "Source: " << sourceCountry->getName() << endl;
+   cout << "Target: " << targetCountry->getName() << endl;
+   cout << "Armies: " << player.phaseArmies << endl;
    cout << "-----------------------------------" << endl;
 }

@@ -44,14 +44,16 @@ class Player
 
         friend ostream& operator<<(ostream &output, const Player &player);
 
+        // TODO friend the observer
+        // Phase components
+        Player::Phase activePhase;
+        int phaseArmies;
+        Country* sourceCountry;
+        Country* targetCountry;
     private:
         const string name;
         vector<Country*> countries;
         vector<Card*> cards;
-        // Phase components
-        Player::Phase activePhase;
-        Country* sourceCountry;
-        Country* targetCountry;
 };
 
 inline ostream& operator<<(ostream &output, const Player *player)

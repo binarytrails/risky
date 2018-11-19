@@ -102,6 +102,7 @@ bool Player::reinforce()
     string countryName;
 
     cout << "How many armies? "; cin >> armies;
+    this->phaseArmies = armies;
     cout << "Destination country: "; cin >> countryName;
 
     Country *country = this->getCountry(countryName);
@@ -124,6 +125,7 @@ bool Player::attack()
     string dCountryName;
 
     cout << "How many armies? "; cin >> armies;
+    this->phaseArmies = armies;
     cout << "Source country: "; cin >> sCountryName;
     cout << "Destination country: "; cin >> dCountryName;
 
@@ -146,6 +148,7 @@ bool Player::fortify()
     string countryName;
 
     cout << "How many armies? "; cin >> armies;
+    this->phaseArmies = armies;
     cout << "Destination country: "; cin >> countryName;
 
     Country *country = this->getCountry(countryName);
