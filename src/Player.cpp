@@ -47,6 +47,16 @@ bool Player::hasCountry(string name)
     return false;
 }
 
+Country* Player::getCountry(string name)
+{
+    for (Country* country: this->countries)
+    {
+        if (country->getName() == name)
+            return country;
+    }
+    return NULL;
+}
+
 vector<Country*> Player::getCountries() const
 {
     return this->countries;

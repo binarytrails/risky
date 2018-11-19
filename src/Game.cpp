@@ -182,24 +182,31 @@ bool Game::shell_start()
         while (placedArmies != nbOfArmies)
         {
             int nb = 0;
-            string country;
+            string countryName;
             cout << "How many armies? "; cin >> nb;
             if ((nb < 1) or ((placedArmies + nb) > nbOfArmies))
-                cerr << "Error: wrong amount of armies" << endl;
-            else
             {
-                cout << "Destination country: "; cin >> country;
-                if (!player->hasCountry(country))
-                {
-                    cerr << "You don't have this country" << endl;
-                    continue;
-                }
-                placedArmies += nb;
-                if (nbOfArmies - placedArmies == 0)
-                    continue;
-                cout << "There is " << nbOfArmies - placedArmies <<
-                        " armies to place" << endl;
+                cerr << "Error: wrong amount of armies" << endl;
+                continue;
             }
+            cout << "Destination country: "; cin >> countryName;
+            if (!player->hasCountry(countryName))
+            {
+                cerr << "You don't have this country" << endl;
+                continue;
+            }
+            placedArmies += nb;
+
+            Country *country = player->getCountry(countryName);
+            country->addArmies(nb);
+            cout << countryName << " has now " <<
+                    country->getArmies() << " armies" << endl;
+
+            if (nbOfArmies - placedArmies == 0)
+                continue;
+
+            cout << "There is " << nbOfArmies - placedArmies <<
+                    " armies to place" << endl;
         }
     }
 

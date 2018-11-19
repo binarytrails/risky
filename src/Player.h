@@ -28,6 +28,7 @@ class Player
         void addCountry(Country* country);
         void removeCountry(Country* country);
         bool hasCountry(string name);
+        Country* getCountry(string name);
         vector<Country*> getCountries() const;
 
         void addCard(Card* card);
@@ -47,7 +48,6 @@ class Player
         const string name;
         vector<Country*> countries;
         vector<Card*> cards;
-        //map<Country*, nbOfArmies...
         Player::Phase activePhase;
 };
 
