@@ -19,7 +19,6 @@ class Player
         enum Phase {
             REINFORCE, ATTACK, FORTIFY
         };
-        Player::Phase activePhase;
 
         Player(const string name);
         ~Player();
@@ -40,6 +39,7 @@ class Player
         bool reinforce();
         bool attack();
         bool fortify();
+        Player::Phase getActivePhase() const;
 
         friend ostream& operator<<(ostream &output, const Player &player);
 
@@ -48,6 +48,7 @@ class Player
         vector<Country*> countries;
         vector<Card*> cards;
         //map<Country*, nbOfArmies...
+        Player::Phase activePhase;
 };
 
 inline ostream& operator<<(ostream &output, const Player *player)

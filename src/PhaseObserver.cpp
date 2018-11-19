@@ -18,12 +18,27 @@ int PhaseObserver::getId() const
 
 void PhaseObserver::update(Player *player)
 {
+   string phaseName;
+   Player::Phase phase = player->getActivePhase();
+
+   switch (phase)
+   {
+        case Player::Phase::REINFORCE:
+            phaseName = "Reinforcement";
+            break;
+        case Player::Phase::ATTACK:
+            phaseName = "Attack";
+            break;
+        case Player::Phase::FORTIFY:
+            phaseName = "Fortification";
+            break;
+        default:
+            throw -1;
+   }
+
    cout << "--------- PhaseObserver" << this->id <<
            " ----------" << endl;
-
-   cout << "Method: Update" << endl;
    cout << "Player: " << player->getName() << endl;
-   //cout << "Phase:  " << player->activePhase() << endl;
-
+   cout << "Phase:  " << phaseName << endl;
    cout << "-----------------------------------" << endl;
 }

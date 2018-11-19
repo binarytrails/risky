@@ -102,3 +102,8 @@ bool Player::fortify()
     this->activePhase = Player::FORTIFY;
     return false;
 }
+
+Player::Phase Player::getActivePhase() const
+{
+    return this->activePhase;
+}
