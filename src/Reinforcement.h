@@ -14,8 +14,8 @@ using namespace std;
 class Reinforcement {
 public:
 	static void reinforcement(Player*p, Hand&h, int con); // main loop takes in Player's countries, hand and continent
-private:
 	static int calculateTotalReinforcements(Player*, Hand&h, int con); // Calculates how many armies received
+private:
 	static int reinforcementsByCountry(Player* p); 
 	static int reinforcementsByCards(Hand &h); // Calculates how many received from cards in Hand
 	static int reinforcementsByContinent(int con); // TODO get continents
