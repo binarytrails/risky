@@ -3,8 +3,10 @@
 
 #include "PhaseObserver.h"
 
-PhaseObserver::PhaseObserver(int id): id(id)
+PhaseObserver::PhaseObserver(int id, Game *subject):
+    id(id), subject(subject)
 {
+    this->subject->attach(this);
 }
 
 PhaseObserver::~PhaseObserver()
@@ -16,10 +18,11 @@ int PhaseObserver::getId() const
     return this->id;
 }
 
-void PhaseObserver::update(Player *player)
+void PhaseObserver::update()
 {
+   Player& player = *this->subject->activePlayer;
    string phaseName;
-   Player::Phase phase = player->getActivePhase();
+   Player::Phase phase = player.getActivePhase();
 
    switch (phase)
    {
@@ -38,7 +41,7 @@ void PhaseObserver::update(Player *player)
 
    cout << "--------- PhaseObserver" << this->id <<
            " ----------" << endl;
-   cout << "Player: " << player->getName() << endl;
+   cout << "Player: " << player.getName() << endl;
    cout << "Phase:  " << phaseName << endl;
    cout << "-----------------------------------" << endl;
 }

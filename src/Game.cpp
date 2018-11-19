@@ -267,5 +267,5 @@ void Game::notify()
 {
     list<PhaseObserver*>::iterator i = this->phaseObservers.begin();
     for (; i != this->phaseObservers.end(); ++i)
-        (*i)->update(this->activePlayer);
+        (*i)->update();
 }

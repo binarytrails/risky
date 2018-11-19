@@ -22,11 +22,10 @@ int main(int argc, char *argv[])
     }
 
     Game *game = new Game(Game::UI::SHELL);
-    PhaseObserver *phaseObserver1 = new PhaseObserver(1);
-
-    game->attach(phaseObserver1);
+    PhaseObserver *po1 = new PhaseObserver(1, game);
     game->play();
 
+    delete po1;
     delete game;
     return 0;
 }

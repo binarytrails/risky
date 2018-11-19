@@ -24,6 +24,8 @@
 
 using namespace std;
 
+class PhaseObserver; // forward declaration
+
 class Game
 {
     public:
@@ -67,4 +69,7 @@ class Game
         // SHELL UI
         bool shell_init();
         bool shell_start();
+
+        // Friends
+        friend class PhaseObserver;
 };

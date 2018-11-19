@@ -4,19 +4,23 @@
 #pragma once
 
 #include <iostream>
+#include "Game.h"
 #include "Player.h"
 
 using namespace std;
 
+class Game; // forward declaration
+
 class PhaseObserver
 {
     public:
-        PhaseObserver(int id);
+        PhaseObserver(int id, Game *subject);
         ~PhaseObserver();
 
         int getId() const;
-        void update(Player *player);
+        void update();
 
     private:
         int id;
+        Game *subject;
 };
