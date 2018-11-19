@@ -2,6 +2,7 @@
 //! @author Vsevolod Ivanov
 
 #include "Map.h"
+#include <iostream>
 
 Map::Map(const int nbOfNodes)
 {
@@ -91,5 +92,40 @@ void Map::log() const
         output << "}";
         console->debug(output.str()); output.str("");
     }
+}
+
+//added by Keven abellard
+vector<Country> Map::getAdj(Country &c){
+	int x = isInContinent(c);
+	int y = 0;
+	vector<Country> v;
+	auto neighbors = adjacent_vertices(*(countryMapping.find(&c)->second), continents[x]);
+	for (auto adjIt = neighbors.first; adjIt != neighbors.second; ++adjIt) {
+		
+		y = *adjIt;
+
+
+		v.push_back(*(countryMappingINV.find(y)->second));
+	}
+	return v;
+
+}
+
+int Map::isInContinent(Country &C) {
+	int x = continents.size();
+	int i = 0;
+	int v = 0;
+	pair<int, bool> p;
+
+	while (i < x) {
+		p = continents[x].find_vertex(*(countryMapping.find(&C)->second));
+		if (p.second == true) {
+			v = i;
+			break;
+		}
+		i++;
+	}
+
+	return v;
 }
 
