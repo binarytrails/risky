@@ -85,17 +85,20 @@ vector<int> Player::rollDices(const int number)
 bool Player::reinforce()
 {
     cout << "Player::reinforce()" << endl;
-    return 1;
+    this->activePhase = Player::REINFORCE;
+    return false;
 }
 
 bool Player::attack()
 {
     cout << "Player::attack()" << endl;
-    return 1;
+    this->activePhase = Player::ATTACK;
+    return false;
 }
 
 bool Player::fortify()
 {
     cout << "Player::fortify()" << endl;
-    return 1;
+    this->activePhase = Player::FORTIFY;
+    return false;
 }

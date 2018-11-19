@@ -19,6 +19,7 @@ game: all
 	${root}/Continent.cpp ${root}/Country.cpp ${root}/Player.cpp \
 	${root}/Card.cpp ${root}/Deck.cpp ${root}/PlayerDice.cpp \
 	${root}/Window.cpp ${root}/Game.cpp ${root}/GameDriver.cpp \
+	${root}/PhaseObserver.cpp \
 	-o ${build}/game.out
 
 player: all

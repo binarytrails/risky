@@ -16,6 +16,11 @@ using namespace std;
 class Player
 {
     public:
+        enum Phase {
+            REINFORCE, ATTACK, FORTIFY
+        };
+        Player::Phase activePhase;
+
         Player(const string name);
         ~Player();
 

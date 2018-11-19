@@ -225,16 +225,22 @@ void Game::play()
          */
         for (auto player: this->players)
         {
-            cout << "Turn of " << player->getName() <<
-                    " (press enter to continue)" << endl;
+            this->activePlayer = player;
+
+            cout << "Turn of " << player->getName() << ":" << endl;
+            cout << "(press enter to continue)";
+
             if (cin.get() == '\n')
             {
-                // action 1
+                // phase 1
                 player->reinforce();
-                // action 2
+                this->notify();
+                // phase 2
                 player->attack();
-                // action 3
+                this->notify();
+                // phase 3
                 player->fortify();
+                this->notify();
             }
         }
     }
@@ -244,4 +250,22 @@ bool Game::addPlayer(Player *player)
 {
     this->players.push_back(player);
     return true;
+}
+
+void Game::attach(PhaseObserver* observer)
+{
+    this->phaseObservers.push_back(observer);
+}
+
+void Game::detach(PhaseObserver* observer)
+{
+    this->phaseObservers.remove(observer);
+    delete observer;
+}
+
+void Game::notify()
+{
+    list<PhaseObserver*>::iterator i = this->phaseObservers.begin();
+    for (; i != this->phaseObservers.end(); ++i)
+        (*i)->update(this->activePlayer);
 }
