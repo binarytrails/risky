@@ -113,46 +113,30 @@ bool Player::reinforce()
     return true;
 }
 
-bool Player::attack()
+bool Player::attack(map *m)
 {
     cout << "Attack phase!" << endl;
     this->activePhase = Player::ATTACK;
 
     // NOTE placeholder code until team members merge
-    int armies = 0;
-    string sCountryName;
-    string dCountryName;
+	Player &p = *this;
 
-    cout << "How many armies? "; cin >> armies;
-    cout << "Source country: "; cin >> sCountryName;
-    cout << "Destination country: "; cin >> dCountryName;
-
-    Country *sCountry = this->getCountry(sCountryName);
-    Country *dCountry = this->getCountry(dCountryName);
-
-    this->sourceCountry = sCountry;
-    this->targetCountry = dCountry;
+	AttackPhase::attack(p, *m);
+	return 1;
 
     return true;
 }
 
-bool Player::fortify()
+bool Player::fortify(map *m)
 {
     cout << "Fortification phase!" << endl;
     this->activePhase = Player::FORTIFY;
 
     // NOTE placeholder code until team members merge
-    int armies = 0;
-    string countryName;
+	Player &p = *this;
 
-    cout << "How many armies? "; cin >> armies;
-    cout << "Destination country: "; cin >> countryName;
-
-    Country *country = this->getCountry(countryName);
-    this->targetCountry = country;
-    country->addArmies(armies);
-    cout << countryName << " has now " <<
-            country->getArmies() << " armies" << endl;
+	FortificationPhase::fortify(p, *m);
+	return 1;
 
     return true;
 }

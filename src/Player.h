@@ -10,6 +10,8 @@
 #include "Country.h"
 #include "Card.h"
 #include "PlayerDice.h"
+#include "FortificationPhase.h"
+#include "AttackPhase.h"
 
 using namespace std;
 
@@ -38,8 +40,8 @@ class Player
         vector<int> rollDices(const int number);
 
         bool reinforce();
-        bool attack();
-        bool fortify();
+        bool attack(map *m);
+        bool fortify(map *m);
         Player::Phase getActivePhase() const;
 
         friend ostream& operator<<(ostream &output, const Player &player);

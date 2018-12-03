@@ -31,6 +31,8 @@ int Map::addCountry(Country* country, Map::Graph& continent)
     }
     const int countryIndex = this->countriesData.size();
     add_vertex(countryIndex, continent);
+	countryMapping.insert(pair <Country*, const int>(country, countryIndex));
+	countryMappingINV.insert(pair < const int, Country*>(countryIndex, country));
     countriesData.push_back(country);
     return countryIndex;
 }
@@ -91,5 +93,34 @@ void Map::log() const
         output << "}";
         console->debug(output.str()); output.str("");
     }
+}
+
+//Added by Keven Abellard
+vector<Country> Map::getAdj(Country &c){
+	vector<int> indexes;
+	vector<Country> v;
+	int ind = (countryMapping.find(&c)->second);
+	auto nodes = boost::vertices(*this->map);
+
+	for (auto nIt = nodes.first; nIt != nodes.second; ++nIt)
+	{
+		//cout << "Node=" << *nIt << " with Edges={";
+		auto neighbors = adjacent_vertices(*nIt, *this->map);
+
+		for (auto adjIt = neighbors.first; adjIt != neighbors.second; ++adjIt)
+			//std::cout << "(" << *nIt << "," << *adjIt << ")";
+			if (*nIt == ind) {
+				indexes.push_back(*adjIt);
+			}
+
+		//cout << "}" << endl;
+	}
+
+	int i = 0;
+	while (i < indexes.size()) {
+		v.push_back(*(countryMappingINV.find(indexes[i])->second));
+		i++;
+	}
+	return v;
 }
 

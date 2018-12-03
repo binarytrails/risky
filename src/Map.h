@@ -12,6 +12,7 @@
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "Player.h"
 #include "Continent.h"
+#include <map>
 
 using namespace std;
 using namespace boost;
@@ -36,8 +37,15 @@ class Map
                      Map::Graph& continent);
         bool valid() const;
         void log() const;
+		//added by Keven Abellard
+		vector<Country> getAdj(Country &c);
+
 
     private:
+		//added by Keven Abellard
+		map<Country*, const int> countryMapping;
+		map < const int, Country*> countryMappingINV;
+
         Graph* map;
         vector<Graph> continents;
         vector<Continent*> continentsData;
